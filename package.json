@@ -1,0 +1,24 @@
+{
+  "name": "whatsuziemade",
+  "version": "1.0.0",
+  "description": "What Suzie Made – static site (Eleventy + Pages CMS)",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "fetch-images": "node scripts/fetch-images.mjs"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-img": "^7.0.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource/kalam": "^5.3.0",
+    "js-yaml": "^5.4.2",
+    "markdown-it": "^15.0.2"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

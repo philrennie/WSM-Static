@@ -1,0 +1,91 @@
+---
+layout: layouts/base.njk
+headExtra: |
+  <script>
+    // Old WordPress links like /?page_id=87 → new pages
+    (function () {
+      var map = { "87": "/about/", "43": "/contact/", "81": "/links/" };
+      var id = new URLSearchParams(location.search).get("page_id");
+      if (id && map[id]) location.replace(map[id]);
+    })();
+  </script>
+---
+<section class="band band--magenta">
+  <div class="wrap center">
+    <h1 class="heading heading--white">{{ home.hero_title }}</h1>
+    {% if home.hero_subtitle %}<p>{{ home.hero_subtitle }}</p>{% endif %}
+    {% if home.hero_image %}<img eleventy:optional="keep" class="hero-image" src="{{ home.hero_image }}" alt="" sizes="(min-width: 1248px) 1200px, 100vw" loading="eager" eleventy:widths="600,1200">{% endif %}
+  </div>
+</section>
+
+<section class="band band--blush" id="categories">
+  <div class="wrap center">
+    <h2 class="heading">{{ home.categories_heading }}</h2>
+    <ul class="tiles">
+      {%- for cat in collections.categories %}
+      <li>
+        <a href="{{ cat.url }}">
+          <img eleventy:optional="keep" class="tile-img" src="{{ cat.data.icon }}" alt="" sizes="240px" eleventy:widths="240,480">
+          <strong>{{ cat.data.title }}</strong>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{%- set newIn = collections.pieces | newIn(home.new_in_count or 7) %}
+{%- if newIn.length %}
+<section class="band band--pink">
+  <div class="wrap center">
+    <h2 class="heading heading--green">{{ home.new_in_heading }}</h2>
+    {% if home.new_in_text %}<p>{{ home.new_in_text }}</p>{% endif %}
+    <ul class="tiles">
+      {%- for p in newIn %}
+      <li>
+        <a href="{{ p.data.etsy_url or settings.etsy_shop_url }}">
+          <img eleventy:optional="keep" class="tile-img" sizes="240px" src="{{ p.data.image }}" alt="{{ p.data.alt or p.data.title }}" eleventy:widths="240,480">
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+    <p><a class="button" href="{{ settings.etsy_shop_url }}">{{ home.new_in_button_label }}</a></p>
+  </div>
+</section>
+{%- endif %}
+
+<section class="band band--peach">
+  <div class="wrap split">
+    {% if home.about.image %}<img eleventy:optional="keep" class="split__image" sizes="(min-width: 780px) 420px, 100vw" src="{{ home.about.image }}" alt="Suzie" eleventy:widths="420,840">{% endif %}
+    <div>
+      <h2 class="heading center">{{ home.about.heading }}</h2>
+      {{ home.about.text | md | safe }}
+      <p><a class="button" href="/about/">{{ home.about.button_label }}</a></p>
+    </div>
+  </div>
+</section>
+
+{%- if home.newsletter.show %}
+<section class="band band--blush">
+  <div class="wrap center">
+    <h2 class="heading">{{ home.newsletter.heading }}</h2>
+    {{ home.newsletter.text | md | safe }}
+    {% if home.newsletter.button_url %}<p><a class="button" href="{{ home.newsletter.button_url }}">{{ home.newsletter.button_label }}</a></p>{% endif %}
+  </div>
+</section>
+{%- endif %}
+
+<section class="band band--pink">
+  <div class="wrap center">
+    <h2 class="heading heading--green">{{ home.reviews.heading }}</h2>
+    {% if home.reviews.text %}<p>{{ home.reviews.text }}</p>{% endif %}
+    {%- if home.reviews.quotes and home.reviews.quotes.length %}
+    <div class="quotes">
+      {%- for q in home.reviews.quotes %}
+      <blockquote><p>“{{ q.quote }}”</p>{% if q.name %}<footer>— {{ q.name }}</footer>{% endif %}</blockquote>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    <p><a class="button" href="{{ home.reviews.button_url }}">{{ home.reviews.button_label }}</a></p>
+  </div>
+</section>

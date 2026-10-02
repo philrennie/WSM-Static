@@ -1,0 +1,4 @@
+# Old WordPress URLs → new pages (GitHub Pages can't do server redirects, so these are tiny HTML pages)
+- { from: /about-2/, to: /about/ }
+- { from: /menu-2/, to: /links/ }
+- { from: /home-2/, to: / }

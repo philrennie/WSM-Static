@@ -1,0 +1,228 @@
+# Pages CMS configuration for What Suzie Made
+# Docs: https://pagescms.org/docs/configuration/
+
+media:
+  input: src/images
+  output: /images
+  categories: [image]
+  rename: safe
+
+content:
+  # ── Things Suzie will edit most ──────────────────────────────
+  - name: pieces
+    label: Artwork
+    type: collection
+    path: src/pieces
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
+    exclude: [pieces.11tydata.js]
+    view:
+      fields: [image, title, category, date, sold]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Name of piece
+        type: string
+        required: true
+      - name: category
+        label: Category
+        type: reference
+        description: Leave empty if it should only appear in "New in" on the homepage.
+        options:
+          collection: categories
+          value: "{path}"
+          label: "{primary}"
+      - name: date
+        label: Date added
+        type: date
+        required: true
+        description: Newest pieces show first.
+      - name: image
+        label: Main photo
+        type: image
+        required: true
+      - name: alt
+        label: Describe the photo in a few words
+        type: string
+        description: Read out to people using screen readers, e.g. "Pink glittery doughnut ceramic with googly eyes".
+      - name: extra_images
+        label: More photos
+        type: image
+        options:
+          multiple: { max: 8 }
+      - name: description
+        label: Description
+        type: text
+      - name: price
+        label: Price
+        type: string
+        description: Optional, e.g. £45
+      - name: etsy_url
+        label: Etsy listing link
+        type: string
+        description: Optional. Paste the link to this piece on Etsy.
+      - name: sold
+        label: Sold
+        type: boolean
+      - name: new_in
+        label: Show in "New in" on the homepage
+        type: boolean
+        description: The newest ticked pieces appear on the homepage.
+
+  - name: categories
+    label: Categories
+    type: collection
+    path: src/categories
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    exclude: [categories.11tydata.js]
+    view:
+      fields: [icon, title, order, hidden]
+      primary: title
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Category name
+        type: string
+        required: true
+      - name: order
+        label: Position on homepage
+        type: number
+        description: 1 = first
+      - name: icon
+        label: Tile image
+        type: image
+        required: true
+        description: Square-ish photo shown on the homepage.
+      - name: tagline
+        label: Short tagline
+        type: string
+      - name: body
+        label: Intro text
+        type: rich-text
+        options: { format: markdown }
+      - name: placeholder_image
+        label: Example image
+        type: image
+        description: Shown only while this category has no artwork in it.
+      - name: hidden
+        label: Hide this category
+        type: boolean
+
+  # ── Fixed pages ───────────────────────────────────────────────
+  - name: home
+    label: Homepage
+    type: file
+    path: src/_data/home.yml
+    format: yaml
+    fields:
+      - { name: hero_title, label: Main heading, type: string }
+      - { name: hero_subtitle, label: Sub-heading, type: string }
+      - { name: hero_image, label: Banner image, type: image }
+      - { name: categories_heading, label: Categories heading, type: string }
+      - { name: new_in_heading, label: New in – heading, type: string }
+      - { name: new_in_text, label: New in – text, type: text }
+      - { name: new_in_count, label: New in – how many pieces to show, type: number }
+      - { name: new_in_button_label, label: New in – button text, type: string }
+      - name: about
+        label: About Suzie box
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: image, label: Photo, type: image }
+          - { name: text, label: Text, type: rich-text, options: { format: markdown } }
+          - { name: button_label, label: Button text, type: string }
+      - name: newsletter
+        label: Newsletter box
+        type: object
+        fields:
+          - { name: show, label: Show this box, type: boolean }
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: Text, type: rich-text, options: { format: markdown } }
+          - { name: button_label, label: Button text, type: string }
+          - { name: button_url, label: Button link, type: string }
+      - name: reviews
+        label: Reviews box
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: button_label, label: Button text, type: string }
+          - { name: button_url, label: Button link, type: string }
+          - name: quotes
+            label: Review quotes (optional)
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{fields.name}" }
+            fields:
+              - { name: quote, label: Quote, type: text }
+              - { name: name, label: Customer name, type: string }
+
+  - name: about
+    label: About page
+    type: file
+    path: src/_data/about.yml
+    format: yaml
+    fields:
+      - { name: title, label: Heading, type: string }
+      - { name: image, label: Photo (optional), type: image }
+      - { name: body, label: Main text, type: rich-text, options: { format: markdown } }
+      - { name: highlights, label: Sparkly highlights, type: string, list: true }
+
+  - name: contact
+    label: Contact page
+    type: file
+    path: src/_data/contact.yml
+    format: yaml
+    fields:
+      - { name: title, label: Heading, type: string }
+      - { name: body, label: Text, type: rich-text, options: { format: markdown } }
+
+  # ── Rarely touched ────────────────────────────────────────────
+  - name: settings
+    label: Site settings
+    type: file
+    path: src/_data/settings.yml
+    format: yaml
+    fields:
+      - { name: site_name, label: Site name, type: string }
+      - { name: title_suffix, label: Homepage title (browser tab / Google), type: string }
+      - { name: description, label: Site description (Google), type: text }
+      - { name: welcome_banner, label: Green banner text, type: string }
+      - { name: tagline, label: Pink banner text, type: string }
+      - { name: logo, label: Logo, type: image }
+      - { name: email, label: Contact email, type: string }
+      - { name: etsy_shop_url, label: Etsy shop link, type: string }
+      - { name: instagram_url, label: Instagram link, type: string }
+      - { name: footer_heading, label: Footer heading, type: string }
+      - name: socials
+        label: Social links (footer, contact and links pages)
+        type: object
+        list: true
+        fields:
+          - name: platform
+            label: Platform
+            type: select
+            options:
+              values: [Etsy, Instagram, Facebook, TikTok, Other]
+          - { name: url, label: Link, type: string }
+
+  - name: category_text
+    label: Category page wording
+    type: file
+    path: src/_data/categoryText.yml
+    format: yaml
+    fields:
+      - { name: back_link, label: Back link, type: string }
+      - { name: empty_heading, label: Heading when empty ({title} = category name), type: string }
+      - { name: empty_text, label: Text when empty, type: text }
+      - { name: etsy_text, label: Etsy text, type: text }
+      - { name: etsy_button, label: Etsy button, type: string }
+      - { name: instagram_link, label: Instagram link text, type: string }

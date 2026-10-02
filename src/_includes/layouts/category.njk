@@ -1,0 +1,40 @@
+---
+layout: layouts/base.njk
+---
+{%- set slug = page.fileSlug %}
+{%- set items = collections.pieces | inCategory(slug) %}
+<section class="band band--blush">
+  <div class="wrap">
+    <p><a href="/#categories">{{ categoryText.back_link }}</a></p>
+    <h1 class="heading">{{ title }}</h1>
+    {% if tagline %}<p class="lead">{{ tagline }}</p>{% endif %}
+    {{ content | safe }}
+
+    {%- if items.length %}
+    <ul class="gallery">
+      {%- for p in items %}
+      <li class="piece{% if p.data.sold %} piece--sold{% endif %}">
+        <a href="{{ p.data.image }}" class="piece__image"><img eleventy:optional="keep" src="{{ p.data.image }}" alt="{{ p.data.alt or p.data.title }}"></a>
+        <h2 class="piece__title">{{ p.data.title }}</h2>
+        {%- if p.data.sold %}<p class="piece__price">Sold</p>{% elif p.data.price %}<p class="piece__price">{{ p.data.price }}</p>{% endif %}
+        {%- if p.data.description %}<div class="piece__desc">{{ p.data.description | md | safe }}</div>{% endif %}
+        {%- if p.data.extra_images and p.data.extra_images.length %}
+        <div class="piece__extra">
+          {%- for img in p.data.extra_images %}<a href="{{ img }}"><img eleventy:optional="keep" src="{{ img }}" alt="{{ p.data.title }} – photo {{ loop.index + 1 }}" eleventy:widths="160,320"></a>{% endfor %}
+        </div>
+        {%- endif %}
+        {%- if p.data.etsy_url and not p.data.sold %}<p><a class="button button--small" href="{{ p.data.etsy_url }}">View on Etsy</a></p>{% endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    {% if placeholder_image %}<img eleventy:optional="keep" class="placeholder" src="{{ placeholder_image }}" alt="An example of Suzie’s work">{% endif %}
+    <h2 class="heading heading--small">{{ categoryText.empty_heading | replace("{title}", title) }}</h2>
+    <p>{{ categoryText.empty_text }}</p>
+    {%- endif %}
+
+    <p>{{ categoryText.etsy_text }}</p>
+    <p><a class="button" href="{{ settings.etsy_shop_url }}">{{ categoryText.etsy_button }}</a></p>
+    <p><a href="{{ settings.instagram_url }}">{{ categoryText.instagram_link }}</a></p>
+  </div>
+</section>

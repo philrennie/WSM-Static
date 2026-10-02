@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- set pageTitle = (title + " – " + settings.site_name) if (title and page.url != "/") else (settings.site_name + " – " + settings.title_suffix) %}
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ description or settings.description }}">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:description" content="{{ description or settings.description }}">
+  <meta property="og:image" content="https://{{ meta.domain }}{{ settings.logo }}">
+  <link rel="icon" href="{{ settings.logo }}">
+  <link rel="preload" href="/assets/fonts/kalam-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  {%- if headExtra %}{{ headExtra | safe }}{% endif %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header>
+    {%- if settings.welcome_banner %}<p class="strip strip--green"><strong>{{ settings.welcome_banner }}</strong></p>{% endif %}
+    {%- if settings.tagline %}<p class="strip strip--pink"><strong>{{ settings.tagline }}</strong></p>{% endif %}
+    <div class="masthead">
+      <nav class="masthead__nav" aria-label="Main">
+        <a href="/">Home</a> · <a href="/#categories">Categories</a><br>
+        <a href="/about/">About Suzie</a> · <a href="/contact/">Contact</a>
+      </nav>
+      <a class="masthead__logo" href="/"><img eleventy:optional="keep" src="{{ settings.logo }}" alt="{{ settings.site_name }}" width="160" height="160" sizes="160px" eleventy:widths="160,320" loading="eager"></a>
+      <p class="masthead__social">
+        <a href="{{ settings.instagram_url }}">Instagram ↗</a><br>
+        <a href="{{ settings.etsy_shop_url }}">Etsy shop ↗</a>
+      </p>
+    </div>
+  </header>
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="band band--pink">
+    <div class="wrap center">
+      <h2 class="heading heading--green">{{ settings.footer_heading }}</h2>
+      <p>
+        {%- for s in settings.socials %}<a href="{{ s.url }}">{{ s.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor -%}
+      </p>
+      <p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
+      <p><a href="/">Home</a> · <a href="/#categories">Categories</a> · <a href="/about/">About Suzie</a> · <a href="/contact/">Contact Me</a></p>
+      <p class="small">© {{ "" | year }} {{ settings.site_name }}</p>
+    </div>
+  </footer>
+</body>
+</html>

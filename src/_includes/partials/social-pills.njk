@@ -1,0 +1,6 @@
+<ul class="pills">
+  {%- for s in settings.socials %}
+  <li><a href="{{ s.url }}" rel="noopener">{% set platform = s.platform %}{% include "partials/icon.njk" %}<span>{{ s.platform }}</span></a></li>
+  {%- endfor %}
+  <li><a href="mailto:{{ settings.email }}">{% set platform = "Email" %}{% include "partials/icon.njk" %}<span>Email</span></a></li>
+</ul>

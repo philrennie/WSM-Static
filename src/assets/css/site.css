@@ -1,0 +1,150 @@
+/* What Suzie Made — colours and type carried over from the WordPress site */
+@font-face { font-family: "Manrope"; font-weight: 200 800; font-display: swap; src: url("/assets/fonts/manrope.woff2") format("woff2"); }
+@font-face { font-family: "Kalam"; font-weight: 700; font-display: swap; src: url("/assets/fonts/kalam-700.woff2") format("woff2"); }
+
+:root {
+  --ink: #202020;
+  --white: #ffffff;
+  --green: #76ff47;
+  --pink: #ff1aa8;
+  --magenta: #d90078;
+  --blush: #ffe0ec;
+  --peach: #ffad74;
+  --orange: #ff914d;
+  --body: "Manrope", system-ui, sans-serif;
+  --display: "Kalam", "Comic Sans MS", cursive;
+  --wrap: 1200px;
+  --gutter: 24px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 300;
+  font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+}
+img { max-width: 100%; height: auto; display: block; }
+picture { display: block; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .1em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--magenta); outline-offset: 2px; }
+strong { font-weight: 700; }
+p { margin: 0 0 1.2rem; }
+
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: 8px; top: 8px; background: var(--white); padding: 8px 12px; z-index: 10; }
+
+/* ── Header ───────────────────────────── */
+.strip { margin: 0; padding: 10px var(--gutter); text-align: center; }
+.strip--green { background: var(--green); }
+.strip--pink { background: var(--pink); }
+.masthead {
+  max-width: var(--wrap); margin: 0 auto; padding: 20px var(--gutter);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; text-align: center;
+}
+.masthead p { margin: 0; }
+.masthead__logo img { width: 160px; height: 160px; object-fit: contain; }
+@media (max-width: 700px) {
+  .masthead { grid-template-columns: 1fr; gap: 12px; }
+  .masthead__logo { order: -1; justify-self: center; }
+  .masthead__logo img { width: 120px; height: 120px; }
+}
+
+/* ── Bands (full-width coloured sections) ─ */
+.band { padding: 32px var(--gutter); }
+.band--white { background: var(--white); padding-block: 40px; }
+.band--blush { background: var(--blush); }
+.band--pink { background: var(--pink); }
+.band--magenta { background: var(--magenta); }
+.band--peach { background: var(--peach); }
+.wrap { max-width: var(--wrap); margin: 0 auto; }
+.wrap--narrow { max-width: 760px; }
+.center { text-align: center; }
+
+.heading {
+  font-family: var(--display); font-weight: 700; line-height: 1.1;
+  font-size: clamp(1.6rem, 1.3rem + 1.6vw, 2.6rem);
+  color: var(--magenta); margin: 0 0 1rem;
+}
+.heading--white { color: var(--white); }
+.heading--green { color: var(--green); }
+.heading--small { font-size: clamp(1.3rem, 1.1rem + 1vw, 1.9rem); margin-top: 1.5rem; }
+.lead { font-size: 1.1em; }
+.small { font-size: .8em; opacity: .8; }
+
+.button {
+  display: inline-block; background: var(--magenta); color: var(--white);
+  padding: 16px 36px; border-radius: 9999px; text-decoration: none; font-size: .85em; font-weight: 500;
+}
+.button:hover { background: #b30063; }
+.button--small { padding: 10px 22px; font-size: .75em; }
+
+.hero-image { margin: 1rem auto 0; width: 100%; max-width: 1200px; }
+
+/* ── Square tiles (categories / new in) ── */
+.tiles {
+  list-style: none; margin: 0 0 1.5rem; padding: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 32px;
+}
+.tiles > li { flex: 0 1 200px; }
+@media (max-width: 500px) { .tiles { gap: 16px; } .tiles > li { flex-basis: calc(50% - 8px); } }
+.tiles a { display: block; text-decoration: none; }
+.tiles a:hover strong { text-decoration: underline; }
+.tile-img { width: 100%; max-width: 240px; aspect-ratio: 1; object-fit: cover; margin: 0 auto 12px; }
+
+/* ── About teaser ─────────────────────── */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 50px; align-items: center; }
+.split__image { margin: 0 auto; max-width: 420px; width: 100%; }
+@media (max-width: 780px) { .split { grid-template-columns: 1fr; gap: 24px; } }
+
+/* ── Category gallery ─────────────────── */
+.gallery {
+  list-style: none; padding: 0; margin: 2rem 0;
+  display: grid; gap: 32px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.piece { background: var(--white); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; }
+.piece__image img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+.piece__title { font-family: var(--display); font-size: 1.4rem; color: var(--magenta); margin: 12px 0 4px; }
+.piece__price { font-weight: 700; margin-bottom: .5rem; }
+.piece--sold .piece__image img { opacity: .55; }
+.piece__desc { font-size: .9em; }
+.piece__desc p:last-child { margin-bottom: .8rem; }
+.piece__extra { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: .8rem; }
+.piece__extra img { width: 64px; height: 64px; object-fit: cover; border-radius: 6px; }
+.piece > p:last-child { margin-top: auto; margin-bottom: 0; }
+.placeholder { max-width: 640px; margin: 1.5rem 0; border-radius: 12px; }
+
+/* ── About page ───────────────────────── */
+.feature-image { max-width: 420px; border-radius: 12px; margin: 0 0 1.5rem; }
+.sparkles { list-style: none; padding: 0; font-weight: 700; }
+.sparkles li { margin-bottom: .6rem; }
+.sparkles li::before { content: "✨ "; }
+
+/* ── Social pills (contact + links) ───── */
+.pills { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.center .pills { justify-content: center; }
+.pills a {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
+  border-radius: 9999px; background: var(--blush); color: var(--magenta); text-decoration: none; font-weight: 500;
+}
+.pills a:hover { background: var(--pink); color: var(--white); }
+.icon { width: 22px; height: 22px; fill: currentColor; flex: none; }
+
+/* ── Reviews ──────────────────────────── */
+.quotes { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-bottom: 1.5rem; text-align: left; }
+.quotes blockquote { margin: 0; background: var(--white); border-radius: 16px; padding: 20px; }
+.quotes footer { font-weight: 700; }
+
+/* ── Footer ───────────────────────────── */
+footer.band { padding-block: 32px; }
+footer.band p { margin-bottom: .8rem; }
+
+/* keep the footer at the bottom on short pages */
+body { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }

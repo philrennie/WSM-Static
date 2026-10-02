@@ -1,0 +1,33 @@
+hero_title: Colour outside the ordinary
+hero_subtitle: Weird & whimsical mixed media art, made by Suzie.
+hero_image: /images/Banner.png
+categories_heading: Shop by category
+new_in_heading: New in
+new_in_text: A little peek at Suzie’s colourful world. Browse Etsy for the latest available pieces.
+new_in_count: 7
+new_in_button_label: See what’s new on Etsy
+about:
+  heading: Let’s be friends
+  image: /images/LetsBeFriendsSelfie.jpg
+  text: |-
+    Hi, I’m Suzie, the artist behind What Suzie Made. I create weird and whimsical mixed media art, filled with colour, playful characters and quirky details.
+
+    Every piece is handmade with care. My hope is that it brings a little beauty, wonder and a smile to your day.
+
+    Thank you for supporting my work and being part of this journey. I hope you find something you love!
+  button_label: Meet Suzie
+newsletter:
+  show: true
+  heading: Newsletter signup
+  text: |-
+    Art inspiration, new creations and a little colour in your inbox. Signup is coming soon!
+
+    Until then, find the latest updates on Instagram.
+  button_label: Follow on Instagram
+  button_url: https://www.instagram.com/whatsuziemade/
+reviews:
+  heading: Reviews
+  text: See what customers have to say in Suzie’s Etsy shop.
+  button_label: Read reviews on Etsy
+  button_url: https://www.etsy.com/uk/shop/WhatSuzieMade
+  quotes: []

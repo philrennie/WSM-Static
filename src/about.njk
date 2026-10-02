@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+permalink: /about/
+eleventyComputed:
+  title: "{{ about.title }}"
+---
+<section class="band band--white">
+  <div class="wrap wrap--narrow">
+    <h1 class="heading">{{ about.title }}</h1>
+    {% if about.image %}<img eleventy:optional="keep" class="feature-image" src="{{ about.image }}" alt="Suzie">{% endif %}
+    {{ about.body | md | safe }}
+    {%- if about.highlights and about.highlights.length %}
+    <ul class="sparkles">
+      {%- for h in about.highlights %}<li>{{ h }}</li>{% endfor %}
+    </ul>
+    {%- endif %}
+  </div>
+</section>

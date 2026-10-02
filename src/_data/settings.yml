@@ -1,0 +1,19 @@
+site_name: What Suzie Made
+title_suffix: Weird and Whimsical Mixed Media Art
+description: Weird and whimsical mixed media art, handmade by Suzie. Statement art, ceramics, plushie taxidermy, prints and mystery scoop bundles.
+welcome_banner: Welcome to the weird and whimsical world of What Suzie Made
+tagline: Handmade art. Happy colours. A little everyday magic.
+logo: /images/WSM_Logo.jpeg
+email: suzie@whatsuziemade.co.uk
+etsy_shop_url: https://www.etsy.com/uk/shop/WhatSuzieMade
+instagram_url: https://www.instagram.com/whatsuziemade/
+footer_heading: Let’s stay in touch
+socials:
+  - platform: Etsy
+    url: https://www.etsy.com/uk/shop/WhatSuzieMade
+  - platform: Instagram
+    url: https://www.instagram.com/whatsuziemade/
+  - platform: Facebook
+    url: https://www.facebook.com/whatsuziemade/
+  - platform: TikTok
+    url: https://www.tiktok.com/@whatsuziemade
