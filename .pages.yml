@@ -17,13 +17,18 @@ content:
     filename: "{year}-{month}-{day}-{primary}.md"
     exclude: [pieces.11tydata.js]
     view:
-      fields: [image, title, category, date, sold]
+      fields: [image, title, category, date, draft, sold]
       primary: title
       sort: [date, title]
       default:
         sort: date
         order: desc
     fields:
+      - name: draft
+        label: Draft (not shown on the website)
+        type: boolean
+        default: true
+        description: New pieces start as drafts. Untick and save when you're ready to publish.
       - name: title
         label: Name of piece
         type: string
