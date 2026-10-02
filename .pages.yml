@@ -28,7 +28,7 @@ content:
         label: Draft (not shown on the website)
         type: boolean
         default: true
-        description: New pieces start as drafts. Untick and save when you're ready to publish.
+        description: New pieces start as drafts by default. Untick and save when you're ready to publish.
       - name: title
         label: Name of piece
         type: string
