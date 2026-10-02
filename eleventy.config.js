@@ -65,6 +65,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("year", () => new Date().getFullYear());
 
   return {
+    // Set by the deploy workflow: "/WSM-Static/" on github.io, "/" once the custom domain is on
+    pathPrefix: process.env.PATH_PREFIX || "/",
     dir: { input: "src", includes: "_includes", data: "_data", output: "_site" },
     markdownTemplateEngine: false, // so text Suzie types is never treated as template code
     htmlTemplateEngine: "njk",

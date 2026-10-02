@@ -4,9 +4,9 @@ headExtra: |
   <script>
     // Old WordPress links like /?page_id=87 → new pages
     (function () {
-      var map = { "87": "/about/", "43": "/contact/", "81": "/links/" };
+      var map = { "87": "about/", "43": "contact/", "81": "links/" };
       var id = new URLSearchParams(location.search).get("page_id");
-      if (id && map[id]) location.replace(map[id]);
+      if (id && map[id]) location.replace(location.pathname.replace(/\/?$/, "/") + map[id]);
     })();
   </script>
 ---
